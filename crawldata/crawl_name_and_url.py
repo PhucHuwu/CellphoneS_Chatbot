@@ -43,6 +43,8 @@ for product in product_elements:
                 "name": name,
                 "url": href
             })
+            
+        # break  # Uncomment to debug
     except:
         continue
 
