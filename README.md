@@ -17,39 +17,39 @@
 ```
 CELLPHONEs_CHATBOT/
 │
-├── app.py                  # Khởi tạo Flask server, endpoint API chính
-├── rag_pipeline.py         # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
-├── apikey.py               # Lưu trữ API key Groq (bảo mật, không public)
+├── app.py                             # Khởi tạo Flask server, endpoint API chính
+├── rag_pipeline.py                    # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
+├── apikey.py                          # Lưu trữ API key Groq (bảo mật, không public)
 │
-├── data/                   # Dữ liệu đã cào (JSON) dùng cho truy vấn
+├── data/                              # Dữ liệu đã cào (JSON) dùng cho truy vấn
 │   ├── faq.json
 │   ├── policy_dataset.json
 │   └── product_details.json
 │
-├── crawldata/              # Script Selenium cào dữ liệu từ website CellphoneS
+├── crawldata/                         # Script Selenium cào dữ liệu từ website CellphoneS
 │   ├── crawl_description.py
 │   ├── crawl_faq.py
 │   ├── crawl_name_and_url.py
 │   ├── crawl_policy.py
 │   └── crawl_spec_and_variant.py
 │
-├── embeddings/             # FAISS index và metadata cho truy vấn nhanh
+├── embeddings/                        # FAISS index và metadata cho truy vấn nhanh
 │   ├── faiss_index.bin
 │   └── metadata.pkl
 │
-├── utils/                  # Các module xử lý dữ liệu, embedding
+├── utils/                             # Các module xử lý dữ liệu, embedding
 │   ├── chunking.py
 │   └── embedding.py
 │
-├── frontend/               # Giao diện web (HTML, CSS, JS)
+├── frontend/                          # Giao diện web (HTML, CSS, JS)
 │   ├── index.html
 │   ├── style.css
 │   └── script.js
 │
-├── CellphoneSChatbot.png   # Ảnh minh họa chatbot
-├── requirements.txt        # Danh sách phụ thuộc Python
-├── README.md               # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
-└── .gitignore              # Loại trừ file không cần thiết khi commit
+├── CellphoneSChatbot.png              # Ảnh minh họa chatbot
+├── requirements.txt                   # Danh sách phụ thuộc Python
+├── README.md                          # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
+└── .gitignore                         # Loại trừ file không cần thiết khi commit
 ```
 
 ## Công nghệ sử dụng
