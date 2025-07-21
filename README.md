@@ -4,6 +4,26 @@
     <img src="CellphoneSChatbot.png" alt="CellphoneS Chatbot" width="350">
 </p>
 
+> Chatbot AI thông minh hỗ trợ khách hàng CellphoneS với công nghệ LLM và RAG
+
+## Bắt đầu nhanh
+
+```bash
+# Clone repository
+git clone https://github.com/PhucHuwu/CellphoneS_Chatbot.git
+cd CellphoneS_Chatbot
+
+# Cài đặt môi trường
+conda create -n cps-chatbot python=3.10
+conda activate cps-chatbot
+pip install -r requirements.txt
+
+# Chạy server
+python app.py
+
+# Mở frontend/index.html trong trình duyệt
+```
+
 ## Mục tiêu dự án
 
 -   Xây dựng hệ thống chatbot AI hỗ trợ khách hàng CellphoneS tra cứu thông tin sản phẩm, chính sách, và giải đáp thắc mắc nhanh chóng, chính xác.
@@ -25,7 +45,7 @@
 
 ## Kiến trúc hệ thống
 
-```
+```ascii
 +-------------------+      +-------------------+      +-------------------+
 |   Frontend (Web)  | <--> |   Flask Backend   | <--> |   LLM + FAISS RAG |
 +-------------------+      +-------------------+      +-------------------+
@@ -37,18 +57,18 @@
 
 ## Các module chính
 
--   `app.py`: Khởi tạo Flask server, định nghĩa các endpoint API.
--   `rag_pipeline.py`: Pipeline RAG, gồm các bước tìm kiếm, sinh câu trả lời, và quản lý chỉ mục FAISS.
--   `utils/chunking.py`: Xử lý dữ liệu đầu vào, chia nhỏ thành các đoạn thông tin dễ truy vấn.
--   `utils/embedding.py`: Sinh embedding cho văn bản sử dụng Sentence Transformers.
--   `data_crawler/`: Chứa các script Selenium để cào dữ liệu từ website CellphoneS.
--   `embeddings/`: Lưu trữ FAISS index và metadata cho truy vấn nhanh.
--   `frontend/`: Giao diện web, gồm HTML, CSS, JS.
+-   [`app.py`](app.py): Khởi tạo Flask server, định nghĩa các endpoint API.
+-   [`rag_pipeline.py`](rag_pipeline.py): Pipeline RAG, gồm các bước tìm kiếm, sinh câu trả lời, và quản lý chỉ mục FAISS.
+-   [`utils/chunking.py`](utils/chunking.py): Xử lý dữ liệu đầu vào, chia nhỏ thành các đoạn thông tin dễ truy vấn.
+-   [`utils/embedding.py`](utils/embedding.py): Sinh embedding cho văn bản sử dụng Sentence Transformers.
+-   [`data_crawler/`](data_crawler/): Chứa các script Selenium để cào dữ liệu từ website CellphoneS.
+-   [`embeddings/`](embeddings/): Lưu trữ FAISS index và metadata cho truy vấn nhanh.
+-   [`frontend/`](frontend/): Giao diện web, gồm HTML, CSS, JS.
 
 ## Quy trình cào dữ liệu
 
 -   Sử dụng **Selenium** để tự động thu thập dữ liệu sản phẩm, chính sách, FAQ từ website CellphoneS.
--   Dữ liệu được lưu dưới dạng JSON: `product_details.json`, `policy_dataset.json`, `faq.json`.
+-   Dữ liệu được lưu dưới dạng JSON: [`product_details.json`](data_crawler/product_details.json), [`policy_dataset.json`](data_crawler/policy_dataset.json), [`faq.json`](data_crawler/faq.json).
 -   Các module chunking xử lý dữ liệu thành các đoạn nhỏ, dễ truy vấn và sinh embedding.
 
 ## Pipeline RAG
@@ -66,7 +86,7 @@
 Khuyến nghị sử dụng môi trường ảo (conda):
 
 ```bash
-conda create -n cps-chatbot python=3.10.16
+conda create -n cps-chatbot python=3.10
 conda activate cps-chatbot
 ```
 
@@ -76,9 +96,11 @@ conda activate cps-chatbot
 pip install -r requirements.txt
 ```
 
+Xem chi tiết các phụ thuộc trong file [`requirements.txt`](requirements.txt).
+
 ### 3. Cào dữ liệu (tuỳ chọn)
 
-Chạy script Selenium để cào dữ liệu sản phẩm, chính sách, FAQ từ website CellphoneS. (Xem hướng dẫn trong thư mục `data_crawler/`)
+Chạy script Selenium để cào dữ liệu sản phẩm, chính sách, FAQ từ website CellphoneS. (Xem hướng dẫn trong thư mục [`data_crawler/`](data_crawler/))
 
 ### 4. Khởi tạo chỉ mục FAISS
 
@@ -94,15 +116,17 @@ Server sẽ chạy tại `http://localhost:8000`.
 
 ### 6. Truy cập giao diện web
 
-Mở file `frontend/index.html` bằng trình duyệt để sử dụng chatbot.
+Mở file [`frontend/index.html`](frontend/index.html) bằng trình duyệt để sử dụng chatbot.
 
 ## Hướng dẫn sử dụng API
 
 -   `POST /chat`
     -   **Body:** `{ "query": "Câu hỏi của bạn" }`
     -   **Trả về:** `{ "query": "...", "contexts": [...], "answer": "..." }`
+    -   Xem chi tiết trong [`app.py`](app.py)
 -   `GET /ping`
     -   Kiểm tra trạng thái server.
+    -   Xem chi tiết trong [`app.py`](app.py)
 
 ## Bảo mật & lưu ý triển khai
 
@@ -119,11 +143,11 @@ Mở file `frontend/index.html` bằng trình duyệt để sử dụng chatbot.
 
 ## Tài liệu tham khảo
 
--   [Sentence Transformers](https://www.sbert.net/)
--   [FAISS](https://github.com/facebookresearch/faiss)
--   [Groq API](https://groq.com/)
--   [Selenium](https://www.selenium.dev/)
--   [CellphoneS](https://cellphones.com.vn/)
+-   [Sentence Transformers](https://www.sbert.net/) - Thư viện tạo embedding đa ngôn ngữ
+-   [FAISS](https://github.com/facebookresearch/faiss) - Thư viện tìm kiếm vector hiệu suất cao
+-   [Groq API](https://groq.com/) - API cung cấp LLM hiệu năng cao
+-   [Selenium](https://www.selenium.dev/) - Công cụ tự động hóa trình duyệt web
+-   [CellphoneS](https://cellphones.com.vn/) - Website chính thức của CellphoneS
 
 ## Đóng góp & phát triển
 
@@ -138,4 +162,4 @@ Mở file `frontend/index.html` bằng trình duyệt để sử dụng chatbot.
 
 ---
 
-> Dự án này chỉ phục vụ mục đích demo nội bộ, không dùng cho sản phẩm thương mại.
+> Dự án này chỉ phục vụ mục đích học tập, không dùng cho sản phẩm thương mại.
