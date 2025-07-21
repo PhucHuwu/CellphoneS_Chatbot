@@ -46,9 +46,9 @@ python app.py
 ## Kiến trúc hệ thống
 
 ```ascii
-+-------------------+      +-------------------+      +-------------------+
-|   Frontend (Web)  | <--> |   Flask Backend   | <--> |   LLM + FAISS RAG |
-+-------------------+      +-------------------+      +-------------------+
++------------------+      +------------------+      +------------------+
+|  Frontend (Web)  | <--> |  Flask Backend   | <--> |  LLM + FAISS RAG |
++------------------+      +------------------+      +------------------+
 ```
 
 -   **Frontend**: Giao diện chat trực quan, hiển thị lịch sử hội thoại, quick actions, markdown formatting, trạng thái bot, và hỗ trợ đa nền tảng.
