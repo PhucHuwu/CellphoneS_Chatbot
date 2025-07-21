@@ -1,34 +1,56 @@
 # CellphoneS Chatbot
 
 <p align="center">
-    <img src="CellphoneSChatbot.png" alt="CellphoneS Chatbot"">
+    <img src="CellphoneSChatbot.png" alt="CellphoneS Chatbot">
 </p>
 
 > Chatbot AI thông minh hỗ trợ khách hàng CellphoneS với công nghệ LLM và RAG
-
-## Bắt đầu nhanh
-
-```bash
-# Clone repository
-git clone https://github.com/PhucHuwu/CellphoneS_Chatbot.git
-cd CellphoneS_Chatbot
-
-# Cài đặt môi trường
-conda create -n cps-chatbot python=3.10
-conda activate cps-chatbot
-pip install -r requirements.txt
-
-# Chạy server
-python app.py
-
-# Mở frontend/index.html trong trình duyệt
-```
 
 ## Mục tiêu dự án
 
 -   Xây dựng hệ thống chatbot AI hỗ trợ khách hàng CellphoneS tra cứu thông tin sản phẩm, chính sách, và giải đáp thắc mắc nhanh chóng, chính xác.
 -   Ứng dụng công nghệ LLM kết hợp RAG để tăng độ tin cậy và tính thực tiễn của câu trả lời.
 -   Tối ưu trải nghiệm người dùng với giao diện web hiện đại, dễ sử dụng trên mọi thiết bị.
+
+## Cấu trúc thư mục dự án
+
+```
+CELLPHONEs_CHATBOT/
+│
+├── app.py                  # Khởi tạo Flask server, endpoint API chính
+├── rag_pipeline.py         # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
+├── apikey.py               # Lưu trữ API key Groq (bảo mật, không public)
+│
+├── data/                   # Dữ liệu đã cào (JSON) dùng cho truy vấn
+│   ├── faq.json
+│   ├── policy_dataset.json
+│   └── product_details.json
+│
+├── crawldata/              # Script Selenium cào dữ liệu từ website CellphoneS
+│   ├── crawl_description.py
+│   ├── crawl_faq.py
+│   ├── crawl_name_and_url.py
+│   ├── crawl_policy.py
+│   └── crawl_spec_and_variant.py
+│
+├── embeddings/             # FAISS index và metadata cho truy vấn nhanh
+│   ├── faiss_index.bin
+│   └── metadata.pkl
+│
+├── utils/                  # Các module xử lý dữ liệu, embedding
+│   ├── chunking.py
+│   └── embedding.py
+│
+├── frontend/               # Giao diện web (HTML, CSS, JS)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── CellphoneSChatbot.png   # Ảnh minh họa chatbot
+├── requirements.txt        # Danh sách phụ thuộc Python
+├── README.md               # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
+└── .gitignore              # Loại trừ file không cần thiết khi commit
+```
 
 ## Công nghệ sử dụng
 
@@ -73,11 +95,11 @@ python app.py
 
 ## Pipeline RAG
 
-1.  **Tiền xử lý dữ liệu**: Cào và chuẩn hóa dữ liệu, chunk thành các đoạn ngắn.
-2.  **Embedding**: Sử dụng Sentence Transformers để chuyển đổi văn bản thành vector embedding.
-3.  **Lập chỉ mục FAISS**: Lưu trữ embedding, hỗ trợ tìm kiếm nhanh.
-4.  **Truy vấn**: Khi người dùng gửi câu hỏi, hệ thống tìm kiếm các đoạn thông tin liên quan nhất.
-5.  **Sinh câu trả lời**: LLM (Meta Llama-4 Scout 17B qua Groq API) nhận thông tin liên quan và sinh câu trả lời tiếng Việt, rõ ràng, có dẫn nguồn.
+1. **Tiền xử lý dữ liệu**: Cào và chuẩn hóa dữ liệu, chunk thành các đoạn ngắn.
+2. **Embedding**: Sử dụng Sentence Transformers để chuyển đổi văn bản thành vector embedding.
+3. **Lập chỉ mục FAISS**: Lưu trữ embedding, hỗ trợ tìm kiếm nhanh.
+4. **Truy vấn**: Khi người dùng gửi câu hỏi, hệ thống tìm kiếm các đoạn thông tin liên quan nhất.
+5. **Sinh câu trả lời**: LLM (Meta Llama-4 Scout 17B qua Groq API) nhận thông tin liên quan và sinh câu trả lời tiếng Việt, rõ ràng, có dẫn nguồn.
 
 ## Hướng dẫn cài đặt
 
@@ -141,50 +163,29 @@ Mở file [`frontend/index.html`](frontend/index.html) bằng trình duyệt đ�
 -   Đảm bảo các file dữ liệu JSON và embedding đã được tạo đúng định dạng.
 -   Sử dụng endpoint `/ping` để xác nhận server hoạt động.
 
-## Cấu trúc thư mục dự án
-
-```
-CELLPHONEs_CHATBOT/
-│
-├── app.py                  # Khởi tạo Flask server, endpoint API chính
-├── rag_pipeline.py         # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
-├── apikey.py               # Lưu trữ API key Groq (bảo mật, không public)
-│
-├── data/                   # Dữ liệu đã cào (JSON) dùng cho truy vấn
-│   ├── faq.json
-│   ├── policy_dataset.json
-│   └── product_details.json
-│
-├── crawldata/              # Script Selenium cào dữ liệu từ website CellphoneS
-│   ├── crawl_description.py
-│   ├── crawl_faq.py
-│   ├── crawl_name_and_url.py
-│   ├── crawl_policy.py
-│   └── crawl_spec_and_variant.py
-│
-├── embeddings/             # FAISS index và metadata cho truy vấn nhanh
-│   ├── faiss_index.bin
-│   └── metadata.pkl
-│
-├── utils/                  # Các module xử lý dữ liệu, embedding
-│   ├── chunking.py
-│   └── embedding.py
-│
-├── frontend/               # Giao diện web (HTML, CSS, JS)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-│
-├── CellphoneSChatbot.png   # Ảnh minh họa chatbot
-├── requirements.txt        # Danh sách phụ thuộc Python
-├── README.md               # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
-└── .gitignore              # Loại trừ file không cần thiết khi commit
-```
-
 ## Tài liệu tham khảo
 
 -   [Sentence Transformers](https://www.sbert.net/) - Thư viện tạo embedding đa ngôn ngữ
 -   [FAISS](https://github.com/facebookresearch/faiss) - Thư viện tìm kiếm vector hiệu suất cao
+-   [Groq API](https://groq.com/) - API cung cấp LLM hiệu năng cao
+-   [Selenium](https://www.selenium.dev/) - Công cụ tự động hóa trình duyệt web
+-   [CellphoneS](https://cellphones.com.vn/) - Website chính thức của CellphoneS
+
+## Đóng góp & phát triển
+
+-   Tuân thủ PEP 8, code rõ ràng, có docstring và comment đầy đủ.
+-   Quản lý phụ thuộc qua `requirements.txt`.
+-   Mọi đóng góp vui lòng tạo pull request hoặc liên hệ qua email.
+
+## Liên hệ
+
+-   **Trần Hữu Phúc**
+-   Email: phuctranhuu37@gmail.com
+
+---
+
+> Dự án này chỉ phục vụ mục đích học tập, không dùng cho sản phẩm thương mại.
+
 -   [Groq API](https://groq.com/) - API cung cấp LLM hiệu năng cao
 -   [Selenium](https://www.selenium.dev/) - Công cụ tự động hóa trình duyệt web
 -   [CellphoneS](https://cellphones.com.vn/) - Website chính thức của CellphoneS
