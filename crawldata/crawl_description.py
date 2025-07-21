@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from bs4 import BeautifulSoup
 import json
 
-with open("crawldata/data.json", "r", encoding="utf-8") as f:
+with open("crawldata/product_details.json", "r", encoding="utf-8") as f:
     products = json.load(f)
 
 chrome_options = Options()
@@ -65,7 +65,7 @@ for product in products:
     except Exception as e:
         print(e)
 
-with open("crawldata/data.json", "w", encoding="utf-8") as f:
+with open("crawldata/product_details.json", "w", encoding="utf-8") as f:
     json.dump(updated_products, f, ensure_ascii=False, indent=2)
 
 driver.quit()

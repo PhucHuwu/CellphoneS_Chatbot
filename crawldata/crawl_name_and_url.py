@@ -48,7 +48,7 @@ for product in product_elements:
     except:
         continue
 
-with open("crawldata/data.json", "w", encoding="utf-8") as f:
+with open("crawldata/product_details.json", "w", encoding="utf-8") as f:
     json.dump(products, f, ensure_ascii=False, indent=2)
 
 driver.quit()
