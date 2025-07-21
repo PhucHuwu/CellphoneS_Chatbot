@@ -184,22 +184,3 @@ Mở file [`frontend/index.html`](frontend/index.html) bằng trình duyệt đ�
 ---
 
 > Dự án này chỉ phục vụ mục đích học tập, không dùng cho sản phẩm thương mại.
-
--   [Groq API](https://groq.com/) - API cung cấp LLM hiệu năng cao
--   [Selenium](https://www.selenium.dev/) - Công cụ tự động hóa trình duyệt web
--   [CellphoneS](https://cellphones.com.vn/) - Website chính thức của CellphoneS
-
-## Đóng góp & phát triển
-
--   Tuân thủ PEP 8, code rõ ràng, có docstring và comment đầy đủ.
--   Quản lý phụ thuộc qua `requirements.txt`.
--   Mọi đóng góp vui lòng tạo pull request hoặc liên hệ qua email.
-
-## Liên hệ
-
--   **Trần Hữu Phúc**
--   Email: phuctranhuu37@gmail.com
-
----
-
-> Dự án này chỉ phục vụ mục đích học tập, không dùng cho sản phẩm thương mại.
