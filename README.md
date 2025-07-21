@@ -15,41 +15,40 @@
 ## Cấu trúc thư mục dự án
 
 ```
-CellphoneS_Chatbot/
+CELLPHONEs_CHATBOT/
 │
-├── app.py                             # Khởi tạo Flask server, endpoint API chính
-├── rag_pipeline.py                    # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
-├── apikey.py                          # Lưu trữ API key Groq (bảo mật, không public)
+├── crawldata/                        # Script Selenium cào dữ liệu từ website CellphoneS
+│   ├── crawl_description.py          # Cào mô tả sản phẩm
+│   ├── crawl_faq.py                  # Cào câu hỏi thường gặp (FAQ)
+│   ├── crawl_name_and_url.py         # Cào tên và đường dẫn sản phẩm
+│   ├── crawl_policy.py               # Cào chính sách bán hàng, bảo hành,...
+│   └── crawl_spec_and_variant.py     # Cào thông số kỹ thuật và các phiên bản sản phẩm
 │
-├── data/                              # Dữ liệu đã cào (JSON) dùng cho truy vấn
-│   ├── faq.json
-│   ├── policy_dataset.json
-│   └── product_details.json
+├── data/                             # Dữ liệu đã cào (JSON) dùng cho truy vấn
+│   ├── faq.json                      # Dữ liệu câu hỏi thường gặp
+│   ├── policy_dataset.json           # Dữ liệu chính sách
+│   └── product_details.json          # Dữ liệu chi tiết sản phẩm
 │
-├── crawldata/                         # Script Selenium cào dữ liệu từ website CellphoneS
-│   ├── crawl_description.py
-│   ├── crawl_faq.py
-│   ├── crawl_name_and_url.py
-│   ├── crawl_policy.py
-│   └── crawl_spec_and_variant.py
+├── embeddings/                       # FAISS index và metadata cho truy vấn nhanh
+│   ├── faiss_index.bin               # File FAISS index lưu embedding
+│   └── metadata.pkl                  # Metadata cho các đoạn dữ liệu
 │
-├── embeddings/                        # FAISS index và metadata cho truy vấn nhanh
-│   ├── faiss_index.bin
-│   └── metadata.pkl
+├── frontend/                         # Giao diện web (HTML, CSS, JS)
+│   ├── index.html                    # Trang giao diện chính
+│   ├── script.js                     # Logic xử lý phía client
+│   └── style.css                     # Giao diện, định dạng CSS
 │
-├── utils/                             # Các module xử lý dữ liệu, embedding
-│   ├── chunking.py
-│   └── embedding.py
+├── utils/                            # Các module xử lý dữ liệu, embedding
+│   ├── chunking.py                   # Hàm chia nhỏ dữ liệu thành các đoạn
+│   └── embedding.py                  # Hàm sinh embedding cho văn bản
 │
-├── frontend/                          # Giao diện web (HTML, CSS, JS)
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-│
-├── CellphoneSChatbot.png              # Ảnh minh họa chatbot
-├── requirements.txt                   # Danh sách phụ thuộc Python
-├── README.md                          # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
-└── .gitignore                         # Loại trừ file không cần thiết khi commit
+├── .gitignore                        # Loại trừ file không cần thiết khi commit
+├── apikey.py                         # Lưu trữ API key Groq (bảo mật, không public)
+├── app.py                            # Khởi tạo Flask server, endpoint API chính
+├── CellphoneSChatbot.png             # Ảnh minh họa chatbot
+├── rag_pipeline.py                   # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
+├── README.md                         # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
+├── requirements.txt                  # Danh sách phụ thuộc Python
 ```
 
 ## Công nghệ sử dụng
