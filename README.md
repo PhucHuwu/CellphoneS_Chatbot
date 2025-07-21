@@ -15,7 +15,7 @@
 ## Cấu trúc thư mục dự án
 
 ```
-CELLPHONEs_CHATBOT/
+CellphoneS_Chatbot/
 │
 ├── app.py                             # Khởi tạo Flask server, endpoint API chính
 ├── rag_pipeline.py                    # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
