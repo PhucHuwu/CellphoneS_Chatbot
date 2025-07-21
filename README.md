@@ -1,7 +1,7 @@
 # CellphoneS Chatbot
 
 <p align="center">
-    <img src="CellphoneSChatbot.png" alt="CellphoneS Chatbot" width="350">
+    <img src="CellphoneSChatbot.png" alt="CellphoneS Chatbot"">
 </p>
 
 > Chatbot AI thông minh hỗ trợ khách hàng CellphoneS với công nghệ LLM và RAG
