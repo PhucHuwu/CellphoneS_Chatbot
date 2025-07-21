@@ -48,7 +48,7 @@ CELLPHONEs_CHATBOT/
 ├── CellphoneSChatbot.png             # Ảnh minh họa chatbot
 ├── rag_pipeline.py                   # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
 ├── README.md                         # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
-├── requirements.txt                  # Danh sách phụ thuộc Python
+└── requirements.txt                  # Danh sách phụ thuộc Python
 ```
 
 ## Công nghệ sử dụng
