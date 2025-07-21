@@ -23,6 +23,7 @@ updated_products = []
 for product in products:
     try:
         driver.get(product["url"])
+        driver.execute_script("document.body.style.zoom='25%'")
 
         time.sleep(5)
 
