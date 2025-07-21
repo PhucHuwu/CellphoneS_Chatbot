@@ -1,3 +1,5 @@
 /.github*
 /__pycache__
 /crawldata/data*
+/api*
+/utils/__pycache__

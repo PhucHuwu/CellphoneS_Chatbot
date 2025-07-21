@@ -1,7 +1,7 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.preprocessing import normalize
 
-model = SentenceTransformer("keepitreal/vietnamese-sbert")
+model = SentenceTransformer("sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2")
 
 
 def get_embeddings(texts):
