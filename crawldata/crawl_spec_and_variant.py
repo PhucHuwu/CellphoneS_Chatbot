@@ -20,16 +20,36 @@ driver = webdriver.Chrome(options=chrome_options)
 
 updated_products = []
 
-for idx, product in enumerate(products):
+for product in products:
     try:
-        print(f"{idx + 1}/{len(products)}: {product['name']}")
         driver.get(product["url"])
+        
+        color_price_list = []
+
+        try:
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.CSS_SELECTOR, ".box-product-variants .list-variants"))
+            )
+            variants = driver.find_elements(By.CSS_SELECTOR, ".box-product-variants .list-variants li.item-variant")
+            for variant in variants:
+                try:
+                    color_name = variant.find_element(By.CSS_SELECTOR, "strong.item-variant-name").text.strip()
+                    price = variant.find_element(By.CSS_SELECTOR, "span.item-variant-price").text.strip()
+                    color_price_list.append({
+                        "color": color_name,
+                        "price": price
+                    })
+                except:
+                    continue
+        except:
+            print("skip")
 
         xem_tat_ca_button = WebDriverWait(driver, 10).until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, 'button.button__show-modal-technical'))
         )
         driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", xem_tat_ca_button)
         xem_tat_ca_button.click()
+        
         time.sleep(1)
 
         WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "teleport-modal_content")))
@@ -52,8 +72,11 @@ for idx, product in enumerate(products):
             "id": product["url"].split("/")[-1].replace(".html", ""),
             "name": product["name"],
             "url": product["url"],
-            "specs": specs
+            "specs": specs,
+            "variants": color_price_list
         })
+
+        # break  # Uncomment to debug
     except:
         print("skip")
 
