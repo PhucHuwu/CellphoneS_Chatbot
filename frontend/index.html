@@ -6,17 +6,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CellphoneS Chatbot</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 
 <body>
-    <div class="container">
-        <h2>CellphoneS Chatbot</h2>
-        <div id="chat-box"></div>
-        <form id="chat-form">
-            <input type="text" id="user-input" placeholder="Nhập câu hỏi..." autocomplete="off" required>
-            <button type="submit">Gửi</button>
-        </form>
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="header-content">
+                <div class="bot-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="header-info">
+                    <h3>CellphoneS Assistant</h3>
+                    <span class="status">
+                        <span class="status-dot"></span>
+                        Đang hoạt động
+                    </span>
+                </div>
+                <div class="header-actions">
+                    <button class="action-btn" title="Làm mới cuộc trò chuyện">
+                        <i class="fas fa-refresh"></i>
+                    </button>
+                    <button class="action-btn" title="Cài đặt">
+                        <i class="fas fa-cog"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Messages -->
+        <div id="chat-box" class="chat-messages">
+            <div class="welcome-message">
+                <div class="bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-bubble bot-bubble">
+                            <div class="welcome-text">
+                                <h4>👋 Xin chào! Chào mừng bạn đến với CellphoneS</h4>
+                                <p>Tôi là trợ lý ảo của CellphoneS. Tôi có thể giúp bạn:</p>
+                                <ul>
+                                    <li>🔍 Tìm kiếm sản phẩm điện thoại iPhone</li>
+                                    <li>💰 Kiểm tra giá cả</li>
+                                    <li>📍 Tra cứu thông số kỹ thuật</li>
+                                    <li>🛠️ Đưa ra thông tin chính sách</li>
+                                </ul>
+                                <p>Bạn cần hỗ trợ gì hôm nay?</p>
+                            </div>
+                        </div>
+                        <div class="message-time">Vừa xong</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Typing Indicator -->
+        <div id="typing-indicator" class="typing-indicator" style="display: none;">
+            <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions" id="quick-actions">
+            <div class="quick-action-item" data-message="Tôi muốn biết thông tin về sản phẩm iPhone 16 series">
+                <i class="fab fa-apple"></i>
+                <span>iPhone 16 series</span>
+            </div>
+            <div class="quick-action-item" data-message="Tôi muốn biết thông tin về sản phẩm iPhone 15 series">
+                <i class="fab fa-apple"></i>
+                <span>iPhone 15 series</span>
+            </div>
+            <div class="quick-action-item" data-message="Tôi muốn biết thông tin về sản phẩm iPhone 14 series">
+                <i class="fab fa-apple"></i>
+                <span>iPhone 14 series</span>
+            </div>
+            <div class="quick-action-item" data-message="Tôi muốn biết thông tin về sản phẩm iPhone 13 series">
+                <i class="fab fa-apple"></i>
+                <span>iPhone 13 series</span>
+            </div>
+        </div>
+
+        <!-- Input Form -->
+        <div class="chat-input-container">
+            <form id="chat-form" class="chat-form">
+                <div class="input-wrapper">
+                    <button type="button" class="attachment-btn" title="Đính kèm file">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <input type="text" id="user-input" placeholder="Nhập tin nhắn..." autocomplete="off" required>
+                    <button type="button" class="emoji-btn" title="Emoji">
+                        <i class="fas fa-smile"></i>
+                    </button>
+                    <button type="submit" id="send-button">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 

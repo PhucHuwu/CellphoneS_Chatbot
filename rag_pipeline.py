@@ -63,12 +63,17 @@ def generate_answer(query, contexts, temperature=0.7, max_tokens=2048):
         elif info_type == "policy":
             prompt += f"[Chính sách] Thông tin {i} (Danh mục: {context.get('category', '')}):\n{context.get('text', '')}\n\n"
         elif info_type == "product":
-            prompt += f"[Sản phẩm] Thông tin {i} (Tên: {context.get('name', '')}):\n{context.get('text', '')}\n\n"
+            url = context.get('url', '')
+            prompt += f"[Sản phẩm] Thông tin {i} (Tên: {context.get('name', '')}, url: {url}):\n{context.get('text', '')}\n\n"
         else:
             prompt += f"Thông tin {i}:\n{context.get('text', '')}\n\n"
 
     prompt += f"Câu hỏi của khách hàng: {query}\n\n"
-    prompt += "Vui lòng trả lời dựa trên các thông tin trên. Nếu không đủ thông tin, hãy nói rõ bạn không thể trả lời chính xác. Trả lời ngắn gọn, đầy đủ, dễ hiểu bằng tiếng Việt và nêu rõ nguồn thông tin nếu có thể."
+    prompt += "Vui lòng trả lời dựa trên các thông tin trên."
+    prompt += "Nếu không đủ thông tin, hãy nói rõ bạn không thể trả lời chính xác."
+    prompt += "Trả lời đầy đủ, rõ ý, dễ hiểu bằng tiếng Việt."
+    prompt += "Nếu người dùng hỏi về thông tin sản phẩm, hãy cung cấp thông tin chi tiết về sản phẩm đó và đính kèm url."
+    prompt += "Hãy nhấn mạnh những lưu ý."
 
     try:
         response = client.chat.completions.create(
