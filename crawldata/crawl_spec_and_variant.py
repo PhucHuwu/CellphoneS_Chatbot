@@ -44,7 +44,7 @@ for product in products:
                 except:
                     continue
         except:
-            print(f"Không tìm thấy biến thể màu sắc và giá tiền cua sản phẩm {product['name']}")
+            print(f"Không tìm thấy biến thể màu sắc và giá tiền của sản phẩm {product['name']}")
 
         xem_tat_ca_button = WebDriverWait(driver, 60).until(
             EC.presence_of_element_located((By.CSS_SELECTOR, 'button.button__show-modal-technical'))
