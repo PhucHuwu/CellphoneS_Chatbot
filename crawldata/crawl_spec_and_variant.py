@@ -23,11 +23,13 @@ updated_products = []
 for product in products:
     try:
         driver.get(product["url"])
-        
+
+        time.sleep(5)
+
         color_price_list = []
 
         try:
-            WebDriverWait(driver, 10).until(
+            WebDriverWait(driver, 60).until(
                 EC.presence_of_element_located((By.CSS_SELECTOR, ".box-product-variants .list-variants"))
             )
             variants = driver.find_elements(By.CSS_SELECTOR, ".box-product-variants .list-variants li.item-variant")
@@ -42,31 +44,35 @@ for product in products:
                 except:
                     continue
         except:
-            print("skip")
+            print(f"Không tìm thấy biến thể màu sắc và giá tiền cua sản phẩm {product['name']}")
 
-        xem_tat_ca_button = WebDriverWait(driver, 10).until(
-            EC.element_to_be_clickable((By.CSS_SELECTOR, 'button.button__show-modal-technical'))
+        xem_tat_ca_button = WebDriverWait(driver, 60).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, 'button.button__show-modal-technical'))
         )
         driver.execute_script("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", xem_tat_ca_button)
-        xem_tat_ca_button.click()
-        
         time.sleep(1)
+        driver.execute_script("arguments[0].click();", xem_tat_ca_button)
 
-        WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CLASS_NAME, "teleport-modal_content")))
-        sections = driver.find_elements(By.CSS_SELECTOR, "section.technical-content-section")
+        time.sleep(5)
 
-        specs = {}
+        try:
+            WebDriverWait(driver, 60).until(EC.visibility_of_element_located((By.CLASS_NAME, "teleport-modal_content")))
+            sections = driver.find_elements(By.CSS_SELECTOR, "section.technical-content-section")
 
-        for section in sections:
-            try:
-                title = section.find_element(By.CSS_SELECTOR, "p.title").text.strip()
-                rows = section.find_elements(By.CSS_SELECTOR, "tr.technical-content-item")
-                for row in rows:
-                    spec_name = row.find_element(By.CSS_SELECTOR, "td:first-child").text.strip()
-                    spec_value = row.find_element(By.CSS_SELECTOR, "td:last-child").text.strip()
-                    specs[spec_name] = spec_value
-            except:
-                continue
+            specs = {}
+
+            for section in sections:
+                try:
+                    title = section.find_element(By.CSS_SELECTOR, "p.title").text.strip()
+                    rows = section.find_elements(By.CSS_SELECTOR, "tr.technical-content-item")
+                    for row in rows:
+                        spec_name = row.find_element(By.CSS_SELECTOR, "td:first-child").text.strip()
+                        spec_value = row.find_element(By.CSS_SELECTOR, "td:last-child").text.strip()
+                        specs[spec_name] = spec_value
+                except:
+                    continue
+        except:
+            print(f"Không tìm thấy thông số kỹ thuật của sản phẩm {product['name']}")
 
         updated_products.append({
             "id": product["url"].split("/")[-1].replace(".html", ""),
@@ -77,8 +83,8 @@ for product in products:
         })
 
         # break  # Uncomment to debug
-    except:
-        print("skip")
+    except Exception as e:
+        print(e)
 
 with open("crawldata/data.json", "w", encoding="utf-8") as f:
     json.dump(updated_products, f, ensure_ascii=False, indent=2)
