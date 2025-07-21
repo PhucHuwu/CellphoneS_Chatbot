@@ -141,6 +141,46 @@ Mở file [`frontend/index.html`](frontend/index.html) bằng trình duyệt đ�
 -   Đảm bảo các file dữ liệu JSON và embedding đã được tạo đúng định dạng.
 -   Sử dụng endpoint `/ping` để xác nhận server hoạt động.
 
+## Cấu trúc thư mục dự án
+
+```
+CELLPHONEs_CHATBOT/
+│
+├── app.py                  # Khởi tạo Flask server, endpoint API chính
+├── rag_pipeline.py         # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
+├── apikey.py               # Lưu trữ API key Groq (bảo mật, không public)
+│
+├── data/                   # Dữ liệu đã cào (JSON) dùng cho truy vấn
+│   ├── faq.json
+│   ├── policy_dataset.json
+│   └── product_details.json
+│
+├── crawldata/              # Script Selenium cào dữ liệu từ website CellphoneS
+│   ├── crawl_description.py
+│   ├── crawl_faq.py
+│   ├── crawl_name_and_url.py
+│   ├── crawl_policy.py
+│   └── crawl_spec_and_variant.py
+│
+├── embeddings/             # FAISS index và metadata cho truy vấn nhanh
+│   ├── faiss_index.bin
+│   └── metadata.pkl
+│
+├── utils/                  # Các module xử lý dữ liệu, embedding
+│   ├── chunking.py
+│   └── embedding.py
+│
+├── frontend/               # Giao diện web (HTML, CSS, JS)
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+├── CellphoneSChatbot.png   # Ảnh minh họa chatbot
+├── requirements.txt        # Danh sách phụ thuộc Python
+├── README.md               # Tài liệu hướng dẫn sử dụng, cài đặt, cấu hình
+└── .gitignore              # Loại trừ file không cần thiết khi commit
+```
+
 ## Tài liệu tham khảo
 
 -   [Sentence Transformers](https://www.sbert.net/) - Thư viện tạo embedding đa ngôn ngữ
