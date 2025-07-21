@@ -1,0 +1,8 @@
+flask
+flask-cors
+sentence-transformers
+scikit-learn
+faiss-cpu
+groq
+selenium
+pickle-mixin
