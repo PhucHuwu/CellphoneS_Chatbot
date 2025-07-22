@@ -1,9 +1,13 @@
+import os
+from dotenv import load_dotenv
 from groq import Groq
 import faiss
 import pickle
 from utils.chunking import chunk_faq, chunk_policy, chunk_products
 from utils.embedding import get_embeddings
-from apikey import api
+
+load_dotenv()
+api = os.getenv("API_KEY")
 
 client = Groq(api_key=api)
 

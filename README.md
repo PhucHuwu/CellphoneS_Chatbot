@@ -43,7 +43,7 @@ CELLPHONEs_CHATBOT/
 │   └── embedding.py                  # Hàm sinh embedding cho văn bản
 │
 ├── .gitignore                        # Loại trừ file không cần thiết khi commit
-├── apikey.py                         # Lưu trữ API key Groq (bảo mật, không public)
+├── .env                              # Lưu trữ API key Groq (bảo mật, không public)
 ├── app.py                            # Khởi tạo Flask server, endpoint API chính
 ├── CellphoneSChatbot.png             # Ảnh minh họa chatbot
 ├── rag_pipeline.py                   # Pipeline RAG: tìm kiếm, sinh câu trả lời, quản lý FAISS
@@ -151,7 +151,7 @@ Mở file [`frontend/index.html`](frontend/index.html) bằng trình duyệt đ�
 
 ## Bảo mật & lưu ý triển khai
 
--   **API Key Groq**: Đảm bảo bảo mật file `apikey.py`, không public lên repository.
+-   **API Key Groq**: Đảm bảo bảo mật file `.env`, không public lên repository.
 -   **CORS**: Đã cấu hình cho phép frontend truy cập backend.
 -   **Dữ liệu cào**: Chỉ sử dụng cho mục đích demo/học tập, không dùng cho sản phẩm thương mại.
 -   **Kiểm thử**: Đã kiểm thử với các trường hợp phổ biến, khuyến nghị kiểm thử thêm khi mở rộng dữ liệu.
