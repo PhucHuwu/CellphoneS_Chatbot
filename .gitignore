@@ -3,3 +3,4 @@
 /crawldata/data*
 /api*
 /utils/__pycache__
+/data/test*
