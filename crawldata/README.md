@@ -15,12 +15,12 @@
 
 ```
 crawldata/
-├── crawl_description.py      # Cào mô tả sản phẩm
-├── crawl_faq.py             # Cào câu hỏi thường gặp (FAQ)
-├── crawl_name_and_url.py     # Cào tên và đường dẫn sản phẩm
-├── crawl_policy.py           # Cào chính sách bán hàng, bảo hành,...
-├── crawl_spec_and_variant.py # Cào thông số kỹ thuật và các phiên bản sản phẩm
-├── README.md                 # Tài liệu hướng dẫn sử dụng bộ script
+├── crawl_description.py         # Cào mô tả sản phẩm
+├── crawl_faq.py                 # Cào câu hỏi thường gặp (FAQ)
+├── crawl_name_and_url.py        # Cào tên và đường dẫn sản phẩm
+├── crawl_policy.py              # Cào chính sách bán hàng, bảo hành,...
+├── crawl_spec_and_variant.py    # Cào thông số kỹ thuật và các phiên bản sản phẩm
+├── README.md                    # Tài liệu hướng dẫn sử dụng bộ script
 ```
 
 ---
