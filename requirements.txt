@@ -6,3 +6,4 @@ faiss-cpu
 groq
 selenium
 pickle-mixin
+python-dotenv
