@@ -79,8 +79,12 @@ def generate_answer(query, contexts, temperature=0.7, max_tokens=2048):
         response = client.chat.completions.create(
             model=LLAMA3_MODEL_ID,
             messages=[
-                {"role": "system", "content": "Bạn là trợ lý AI của CellphoneS, một cửa hàng bán điện thoại và thiết bị điện tử. Bạn giúp khách hàng trả lời các câu hỏi về sản phẩm, chính sách và các vấn đề liên quan đến CellphoneS. Trả lời bằng tiếng Việt, ngắn gọn, chính xác, nêu rõ nguồn thông tin nếu có thể."},
-                {"role": "user", "content": prompt}
+                {"role": "system",
+                 "content": """Bạn là trợ lý AI của CellphoneS, một cửa hàng bán điện thoại và thiết bị điện tử.
+                               Bạn giúp khách hàng trả lời các câu hỏi về sản phẩm, chính sách và các vấn đề liên quan đến CellphoneS.
+                               Trả lời bằng tiếng Việt, ngắn gọn, chính xác, nêu rõ nguồn thông tin nếu có thể."""},
+                {"role": "user",
+                 "content": prompt}
             ],
             temperature=temperature,
             max_tokens=max_tokens
