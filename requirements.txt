@@ -5,5 +5,4 @@ scikit-learn
 faiss-cpu
 groq
 selenium
-pickle-mixin
 python-dotenv
