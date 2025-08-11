@@ -78,7 +78,7 @@ CELLPHONEs_CHATBOT/
 
 ## Các module chính
 
--   [`app.py`](app.py): Khởi tạo Flask server, định nghĩa các endpoint API.
+-   [`app.py`](app.py): Khởi tạo Flask server, định nghĩa các endpoint API. **Đã được tối ưu** để tránh segmentation fault và threading conflicts.
 -   [`rag_pipeline.py`](rag_pipeline.py): Pipeline RAG, gồm các bước tìm kiếm, sinh câu trả lời, và quản lý chỉ mục FAISS.
 -   [`utils/chunking.py`](utils/chunking.py): Xử lý dữ liệu đầu vào, chia nhỏ thành các đoạn thông tin dễ truy vấn.
 -   [`utils/embedding.py`](utils/embedding.py): Sinh embedding cho văn bản sử dụng Sentence Transformers.
@@ -130,6 +130,7 @@ Chạy server lần đầu sẽ tự động build FAISS index từ dữ liệu 
 ### 5. Chạy server
 
 ```bash
+conda active cps-chatbot
 python app.py
 ```
 
@@ -155,12 +156,39 @@ Mở file [`frontend/index.html`](frontend/index.html) bằng trình duyệt đ�
 -   **CORS**: Đã cấu hình cho phép frontend truy cập backend.
 -   **Dữ liệu cào**: Chỉ sử dụng cho mục đích demo/học tập, không dùng cho sản phẩm thương mại.
 -   **Kiểm thử**: Đã kiểm thử với các trường hợp phổ biến, khuyến nghị kiểm thử thêm khi mở rộng dữ liệu.
+-   **Ổn định hệ thống**: 
+    - Ứng dụng đã được tối ưu để chạy ổn định với các thư viện ML/AI
+    - Threading được cấu hình an toàn để tránh deadlock và memory leak
+    - Production mode để đảm bảo hiệu suất tốt nhất
 
 ## Kiểm thử & gỡ lỗi
 
 -   Kiểm tra log server khi gặp lỗi sinh câu trả lời hoặc truy vấn dữ liệu.
 -   Đảm bảo các file dữ liệu JSON và embedding đã được tạo đúng định dạng.
 -   Sử dụng endpoint `/ping` để xác nhận server hoạt động.
+
+### Khắc phục lỗi thường gặp
+
+**Lỗi Segmentation Fault:**
+- Ứng dụng đã được cấu hình tự động để tránh lỗi này bằng cách:
+  - Tắt debug mode trong production
+  - Cấu hình `TOKENIZERS_PARALLELISM=false`
+  - Giới hạn số threads: `OMP_NUM_THREADS=1`, `MKL_NUM_THREADS=1`
+
+**Lỗi kết nối:**
+- Đảm bảo môi trường ảo `cps-chatbot` đã được kích hoạt
+- Kiểm tra server đang chạy: `curl http://127.0.0.1:8000/ping`
+- Kiểm tra process: `ps aux | grep "python app.py"`
+
+**Cách test API:**
+```bash
+curl -s http://127.0.0.1:8000/ping
+```
+```bash
+curl -X POST http://127.0.0.1:8000/chat \
+  -H "Content-Type: application/json" \
+  -d '{"query":"hello"}'
+```
 
 ## Tài liệu tham khảo
 
