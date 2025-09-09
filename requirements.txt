@@ -6,3 +6,4 @@ faiss-cpu
 groq
 selenium
 python-dotenv
+tf-keras
