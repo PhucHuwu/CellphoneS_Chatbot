@@ -11,7 +11,7 @@ api = os.getenv("API_KEY")
 
 client = Groq(api_key=api)
 
-LLAMA3_MODEL_ID = "meta-llama/llama-4-scout-17b-16e-instruct"
+GROQ_MODEL_ID = "openai/gpt-oss-120b"
 
 
 def build_index():
@@ -35,7 +35,7 @@ def build_index():
         pickle.dump(metadatas, f)
 
 
-def search_rag(query, k=10):
+def search_rag(query, k=3):
     import pickle
     import faiss
     from utils.embedding import get_embeddings
@@ -80,8 +80,8 @@ def generate_answer(query, contexts, temperature=0.7, max_tokens=2048):
     prompt += "Hãy nhấn mạnh những lưu ý."
 
     try:
-        response = client.chat.completions.create(
-            model=LLAMA3_MODEL_ID,
+        completion = client.chat.completions.create(
+            model=GROQ_MODEL_ID,
             messages=[
                 {"role": "system",
                  "content": """Bạn là trợ lý AI của CellphoneS, một cửa hàng bán điện thoại và thiết bị điện tử.
@@ -91,14 +91,24 @@ def generate_answer(query, contexts, temperature=0.7, max_tokens=2048):
                  "content": prompt}
             ],
             temperature=temperature,
-            max_tokens=max_tokens
+            max_completion_tokens=max_tokens,
+            top_p=1,
+            reasoning_effort="medium",
+            stream=True,
+            stop=None
         )
-        return response.choices[0].message.content
+
+        full_response = ""
+        for chunk in completion:
+            if chunk.choices[0].delta.content:
+                full_response += chunk.choices[0].delta.content
+
+        return full_response
     except Exception as e:
         return f"Đã xảy ra lỗi khi tạo câu trả lời: {str(e)}"
 
 
-def get_answer_from_query(query, k=10, temperature=0.7, max_tokens=2048):
+def get_answer_from_query(query, k=3, temperature=0.7, max_tokens=2048):
     contexts = search_rag(query, k)
 
     answer = generate_answer(query, contexts, temperature, max_tokens)
